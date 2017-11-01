@@ -8,6 +8,7 @@ function output = propagate_backward(current, next)
 % % there is a next layer available, this must be a hidden layer
         current.deltas = (next.deltas * current.weights) .* ...
             (current.values .* (1 - current.values))';
+        current.weight_deltas = (current.values * next.deltas)';
     end
     output = current;
 end
