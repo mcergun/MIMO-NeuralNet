@@ -1,13 +1,16 @@
-% % This script defines the structures used in this implementation
-% % They are here only to serve as an example
+% This script defines the structures used in this implementation
+% They are here only to serve as an example
 
 clear
 clc
 
-% % An example neural network
-% % 2 input neurons, 
-% % 6 hidden neurons on the first layer, 4 hidden neurons on the second layer
-% % 2 output neurons
+% increase printing precision
+format long
+
+% An example neural network
+% 2 input neurons, 
+% 6 hidden neurons on the first layer, 4 hidden neurons on the second layer
+% 2 output neurons
 
 output_layer.count = 2;
 output_layer.desired = zeros(output_layer.count, 1);
@@ -32,5 +35,9 @@ output_layer = propagate_backward(output_layer);
 hidden_layer = propagate_backward(hidden_layer, output_layer);
 input_layer = propagate_backward(input_layer, hidden_layer);
 
-hidden_layer.weight_deltas
-input_layer.weight_deltas
+learning_rate = 0.5;
+
+new_hidden_weights = hidden_layer.weights - learning_rate * hidden_layer.weight_deltas
+new_input_weights = input_layer.weights - learning_rate * input_layer.weight_deltas
+% hidden_layer.weight_deltas
+% input_layer.weight_deltas
