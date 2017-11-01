@@ -13,14 +13,14 @@ format long
 % 6 hidden neurons on the first layer, 4 hidden neurons on the second layer
 % 2 output neurons
 
-output_layer.count = 1;
-output_layer.desired = zeros(output_layer.count, 1);
-hidden_layer = generate_layer(output_layer, 2);
+output_layer.count = 2;
+output_layer.desired = zeros(output_layer.count, 2);
+hidden_layer = generate_layer(output_layer, 4);
 input_layer = generate_layer(hidden_layer, 2);
 learning_rate = 0.5;
 
 input_set = [0 0; 0 1; 1 0; 1 1];
-desired_set = [0; 1; 1; 0]; 
+desired_set = [0 0; 1 0; 1 0; 0 1]; 
 
 epoch_size = 4;
 
@@ -32,7 +32,7 @@ for i=1:epochs
     local_errors = zeros(epoch_size, 1);
     for j=1:epoch_size
         input_layer.values = input_set(j, :)';
-        output_layer.desired = desired_set(j, :);
+        output_layer.desired = desired_set(j, :)';
         hidden_layer = propagate_forward(input_layer, hidden_layer);
         output_layer = propagate_forward(hidden_layer, output_layer);
 
